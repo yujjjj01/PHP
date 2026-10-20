@@ -29,13 +29,35 @@
             <h2>後台管理系統</h2>
             <p>請使用管理員帳號登入（示範：admin / admin1234）</p>
         </div>
+        <!--
+        step1:
+            action: 資料輸入後送到哪個網址
+            method: 送出的方法，通常只會有get及post，laravel還另有put,patch,delete三個方法
+            表單一般用post，可傳大量資料，且不會出現在網址列，較安全
+            所有要送出的資料欄位都要寫在<form>與</form>之間
+            @csrf: 權杖(token)，在laravel中所有表單都要加上@csrf,表示是由自己網站所送出去的不是由他在遠端送出資料，保障網路安全
+            @csrf會自動轉換如下:
+            <input typre="hidden" name="_token" value="xxxxxxxxx" autocomplete="off">
+        
+        step2:要在路由中設設定Route::post("/admin/login",[AdminController:class,"login]);
+        為何要用Route::post,因為form method="post"
 
-        <form data-login>
+        step3:要在AdminController中新增public function login()
+        -->
+
+        <form action="admin/login" method="post">
+            @csrf
             <div class="form-group">
                 <label class="form-label" for="username">帳號</label>
                 <div class="input-icon-wrap">
                     <i class="fa fa-user-shield icon"></i>
-                    <input type="text" id="username" name="username" class="form-control" required autofocus />
+                    <!--
+                    name:後端接收資料用的名稱 id是給瀏覽器或javascript控制用的
+                    required: 使用jquery的必填
+                    autofocus: 自動取得對焦點,游標會自動停佇在這裡
+                    clss = "form-control",bootstrap中輸入框的css
+                    -->
+                    <input type="text" id="username" name="userId" class="form-control" required autofocus />
                 </div>
             </div>
             <div class="form-group">
