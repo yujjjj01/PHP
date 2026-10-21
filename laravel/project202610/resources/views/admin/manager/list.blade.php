@@ -5,6 +5,7 @@
     <tr>
         <td>帳號</td>
         <td>密碼</td>
+        <td>修改</td>
     </tr>
     {{--
         foreach:對所有資料
@@ -19,6 +20,7 @@
     <tr>
         <td>{{$data->userId}}</td>
         <td>{{$data->pwd}}</td>
+        <td><a href="/manager/edit/{{$data->id}}">修改</a></td>
     </tr>
     @endforeach
 </table>
