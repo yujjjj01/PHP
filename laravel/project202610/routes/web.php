@@ -25,3 +25,4 @@ Route::get('/admin/home', [AdminController::class, "home"]); //後台首頁
 
 Route::get('/manager/list', [ManagerController::class, "list"]); //帳號管理
 Route::get("/manager/create", [ManagerController::class, "create"]);//新增帳號
+Route::post("/manager/store", [ManagerController::class, "store"]);//儲存帳號
