@@ -62,4 +62,11 @@ class ManagerController extends Controller
         //轉址回到帳號列表,提示已經修改完成的動作已省略
         return redirect("/manager/list");
     }
+
+    //刪除管理帳號
+    public function delete(Request $req)
+    {
+        Manager::destroy($req->id);
+        return redirect("/manager/list");
+    }
 }
