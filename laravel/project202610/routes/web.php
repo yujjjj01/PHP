@@ -37,3 +37,5 @@ Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]);//編輯帳
 Route::post("/manager/update", [ManagerController::class, "update"]);//更新帳號
 
 Route::get("/manager/delete/{id}", [ManagerController::class, "delete"]);//刪除帳號
+
+Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"]);//檢查帳號

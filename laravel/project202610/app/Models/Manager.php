@@ -34,4 +34,11 @@ class Manager extends Model
         $manager = self::where("userId",$userId)->where("pwd",$pwd)->first();
         return $manager;
     }
+
+    //檢查manager資料表中是否有相同的帳號
+    public function checkAccount(string $userId)
+    {
+        $manager = self::where("userId",$userId)->first();
+        return $manager;
+    }
 }

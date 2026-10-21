@@ -14,12 +14,15 @@ class ManagerController extends Controller
         // 取得 manager 資料表中的全部資料
         $list = Manager::get();
 
-        return view("admin.manager.list", compact("list"));
+        //return view("admin.manager.list", compact("list"));
+        return view("admin.manager.list1", compact("list"));
     }
 
+    //新增管理帳號
     public function create()
     {
-        return view("admin.manager.create");
+        //return view("admin.manager.create");
+        return view("admin.manager.create1");
     }
 
     //儲存新增的帳號
@@ -68,5 +71,15 @@ class ManagerController extends Controller
     {
         Manager::destroy($req->id);
         return redirect("/manager/list");
+    }
+
+    public function checkAccount(Request $req)
+    {
+        $manager = (new Manager())->checkAccount($req->userId);
+
+        if(!empty($manager))
+        {
+            echo("exist");
+        }
     }
 }
