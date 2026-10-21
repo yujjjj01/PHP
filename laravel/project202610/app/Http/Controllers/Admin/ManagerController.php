@@ -14,4 +14,9 @@ class ManagerController extends Controller
 
         return view("admin.manager.list", compact("list"));
     }
+
+    public function create()
+    {
+        return view("admin.manager.create");
+    }
 }

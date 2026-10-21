@@ -1,7 +1,7 @@
 <!--帳號列表-->
 
+<div><a href="create">新增</a></div>
 <table width-"100">
-
     <tr>
         <td>帳號</td>
         <td>密碼</td>
