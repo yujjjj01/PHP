@@ -27,7 +27,10 @@
         </div>
         <div class="auth-title">
             <h2>後台管理系統</h2>
-            <p>請使用管理員帳號登入（示範：admin / admin1234）</p>
+            <p>@if ($errors->has("msg"))
+                <font color="red">{{$errors->first("msg")}}</font>
+                @endif
+            </p>
         </div>
         <!--
         step1:
@@ -57,7 +60,7 @@
                     autofocus: 自動取得對焦點,游標會自動停佇在這裡
                     clss = "form-control",bootstrap中輸入框的css
                     -->
-                    <input type="text" id="username" name="userId" class="form-control" required autofocus />
+                    <input type="text" id="username" name="userId" class="form-control" required autofocus value="{{old('userId')}}" />
                 </div>
             </div>
             <div class="form-group">

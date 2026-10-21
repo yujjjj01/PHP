@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ManagerController;
 use Illuminate\Support\Facades\Route;
 
 /*  
@@ -19,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', [AdminController::class, "index"]);
 //登入的網址,因為resources/views/admin/login.blade.php中form的method為post,所以要用Route::post
-Route::post('/admin/login', [AdminController::class, "login"]);
+Route::post('/admin/login', [AdminController::class, "login"]); //登入
+Route::get('/admin/home', [AdminController::class, "home"]);//後台首頁
+
+Route::get('/manager/list',[ManagerController::class,"list"]);//帳號管理

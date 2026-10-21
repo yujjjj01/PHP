@@ -59,28 +59,37 @@ class AdminController extends Controller
         */
 
         //檢查manager資料表中是否有相同的帳號及密碼
-        $list = (new Manager())->checkManager($userId,$pwd);
+        $list = (new Manager())->checkManager($userId, $pwd);
 
-        if(empty($list))
-        {
-                /*
+        if (empty($list)) {
+            /*
                     empty:空的 empty($list)空的list,表示manager資料表中找不到所輸入的帳號及密碼相同者
                     back():回到上一頁
                     withInput():回到上一頁後,帶回錯誤訊息,msg:自行命名的名稱
                 */
-            return back()->withInput()->withErrors(["msg" =>"帳號密碼錯誤"]);
-        }else{
+            return back()->withInput()->withErrors(["msg" => "帳號或密碼錯誤"]);
+        } else {
             /*
                 所輸入的帳號密碼正確
                 session():暫存資料在伺服器
                 put():設定
                 session()->put("userId",$userId):將所輸入的帳號暫存在伺服器中,名稱為"userId"
             */
-            
-            session()->put("userId",$userId);
-            //轉址到後台頁面
-            return redirect("/admin/home");
 
+            session()->put("userId", $userId);
+
+            /*
+                轉址到後台頁面
+                1.在路由routes/web.php中加上/admin/home
+                2.在AdminController中新增public function home()
+                3.在resources/view/admin中新增home.blade.php
+            */
+            return redirect("/admin/home");
         }
+    }
+    //後台首頁
+    public function home()
+    {
+        return view("admin.home");
     }
 }
