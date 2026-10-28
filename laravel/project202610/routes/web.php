@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\MileStoneController;
+use App\Http\Controllers\Admin\MileStoneTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*  
@@ -39,3 +41,14 @@ Route::post("/manager/update", [ManagerController::class, "update"]);//更新帳
 Route::get("/manager/delete/{id}", [ManagerController::class, "delete"]);//刪除帳號
 
 Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"]);//檢查帳號
+
+//大事記管理
+Route::get("/admin/milestone/list", [MileStoneController::class, "list"]);
+
+//大事記類別管理
+Route::get("/admin/milestone/types/list", [MileStoneTypeController::class, "list"]);
+
+//新增大事記類別
+Route::get("/admin/milestone/types/create", [MileStoneTypeController::class, "create"]);
+
+Route::post("/admin/milestone/types/store",[MileStoneTypeController::class,"store"]);
