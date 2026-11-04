@@ -45,4 +45,22 @@ class MileStoneTypeController extends Controller
         $types = MileStoneType::find($req->id);
         return view("admin.milestone.types.edit",compact("types"));
     }
+
+    public function update(Request $req)
+    {
+        $types = MileStoneType::find($req->id);
+        $types->label = $req->label;
+        $types->title = $req->title;
+        $types->update();
+
+        Session::flash("message","已修改");
+
+        return redirect("/admin/milestone/types/list");
+    }
+
+    //刪除
+    public function delete(Request $req)
+    {
+        MileStoneType::destroy($req->id);
+    }
 }

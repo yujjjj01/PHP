@@ -12,7 +12,50 @@
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <script>
+        function doDelete(id,btn) {
+            Swal.fire({
+                title: '確定要刪除嗎？',
+                text: "刪除後將無法復原！",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，刪除！',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                   $.ajax({
+                        url: '/admin/milestone/types/delete',
+                        type: 'post',
+                        data: { id: id, _token: '{{ csrf_token() }}' },
+                        success: function(response) {
+                            // 刪除成功後，移除該行
+                            $(btn).closest("tr[data-row]").remove();
+                            Swal.fire(
+                                '已刪除！',
+                                '該大事記類別已被刪除。',
+                                'success'
+                            );
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire(
+                                '刪除失敗！',
+                                '請稍後再試。',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            })
+        }
+    </script>
 </head>
+
+
 
 <body class="admin-body">
     @if(Session::has("message"))
@@ -20,7 +63,7 @@
     <script>
         Swal.fire({
             title: "{{Session::get('message')}}",
-            text:"",
+            text: "",
             icon: "success"
         });
     </script>
@@ -101,7 +144,7 @@
                                 <td><span class="badge badge-{{$data->label}}" data-mark>{{$data->title}}</span></td>
                                 <td data-mark>{{$data->title}}</td>
                                 <td>
-                                    <div class="actions"><a href="/admin/milestone/types/edit/{{$data->id}}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a><button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{$data->id}}')"><i class="fa fa-trash"></i> 刪除
+                                    <div class="actions"><a href="/admin/milestone/types/edit/{{$data->id}}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a><button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{$data->id}}',this)"><i class="fa fa-trash"></i> 刪除
                                         </button>
                                     </div>
                                 </td>
