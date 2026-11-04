@@ -65,6 +65,12 @@ Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"])
 Route::group(["middleware" => "manager", "prefix" => "admin/milestone"], function () {
     Route::get("list", [MileStoneController::class, "list"]);
 
+    Route::get("add", [MileStoneController::class, "add"]);
+    Route::post("store", [MileStoneController::class, "store"]);
+    Route::get("edit/{id}", [MileStoneController::class, "edit"]);
+    Route::post("update", [MileStoneController::class, "update"]);
+    Route::post("delete", [MileStoneController::class, "delete"]);
+
     //類別
     Route::group(["prefix" => "types"], function () {
         Route::get("list", [MileStoneTypeController::class, "list"]);

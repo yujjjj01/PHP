@@ -15,4 +15,16 @@ class MileStoneController extends Controller
         $list = MileStone::paginate(10); //每頁顯示10筆資料
         return view("admin.milestone.list", compact("list"));
     }
+    public function add()
+    {
+        return view("admin.milestone.add");
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        // dd($data);
+        MileStone::create($data);
+        return redirect("/admin/milestone/list");
+    }
 }
