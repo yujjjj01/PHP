@@ -75,7 +75,7 @@
 
                              <button type="button"
                                  class="btn btn-danger-outline btn-xs"
-                                 onclick="doDelete('{{ $data->id }}')">
+                                 onclick="doDelete('{{ $data->id }}',this,'/admin/milestone/delete')">
                                  <i class="fa fa-trash"></i> 刪除
                              </button>
 

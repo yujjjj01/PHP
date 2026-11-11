@@ -32,7 +32,7 @@
                     <td><span class="badge badge-{{$data->label}}" data-mark>{{$data->title}}</span></td>
                     <td data-mark>{{$data->title}}</td>
                     <td>
-                        <div class="actions"><a href="/admin/milestone/types/edit/{{$data->id}}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a><button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{$data->id}}',this)"><i class="fa fa-trash"></i> 刪除
+                        <div class="actions"><a href="/admin/milestone/types/edit/{{$data->id}}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a><button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{$data->id}}',this,'/admin/milestone/types/delete')"><i class="fa fa-trash"></i> 刪除
                             </button>
                         </div>
                     </td>

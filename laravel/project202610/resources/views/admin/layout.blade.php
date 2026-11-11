@@ -22,7 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script>
-        function doDelete(id, btn) {
+        function doDelete(id, btn,url) {
             Swal.fire({
                 icon: "question",
                 title: "確定刪除?",
@@ -34,7 +34,7 @@
                 if (result.isConfirmed)
                 {
                     $.ajax({
-                        url: "/admin/milestone/types/delete",
+                        url: url,
                         type: "post",
                         data: {
                             id: id,
