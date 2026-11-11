@@ -83,4 +83,5 @@ Route::group(["middleware" => "manager", "prefix" => "admin/milestone"], functio
     });
 });
 
+//前台
 Route::get("milestone",[MileStone::class,"list"]);

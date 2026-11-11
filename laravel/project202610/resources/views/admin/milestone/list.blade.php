@@ -10,7 +10,7 @@
                  <i class="fa fa-search"></i>
                  <input type="search" name="keyword" class="form-control" placeholder="搜尋標題 / 說明 / 標籤 / 年份" autocomplete="off" />
              </form>
-             <select name="tag_type" class="form-control" data-filter>
+             <select name="evnet_tag_type" class="form-control" data-filter>
                  <option value="">全部類型</option>
                  <option value="milestone">里程碑</option>
                  <option value="product">產品</option>

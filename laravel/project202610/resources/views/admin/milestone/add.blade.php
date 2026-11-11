@@ -4,7 +4,7 @@
 <div class="admin-card">
     <div class="admin-card-header">
         <h2><i class="fa fa-history"></i> <span data-mode-text>新增大事記</span></h2>
-        <a href="milestones.html" class="btn btn-light btn-sm"><i class="fa fa-arrow-left"></i> 返回列表</a>
+        <a href="list" class="btn btn-light btn-sm"><i class="fa fa-arrow-left"></i> 返回列表</a>
     </div>
     <div class="admin-card-body">
         <!-- 網址帶 ?id=編號 時為「修改」，會自動帶入資料 -->

@@ -10,7 +10,8 @@ class FrontMileStoneController extends Controller
 {
     public function list()
     {
+        $years = MileStone::distinct()->orderByDesc("years")->pluck("years");
         $list = MileStone::get();
-        return view("front.milestone.list", compact("list"));
+        return view("front.milestone.list", compact("list","years"));
     }
 }
