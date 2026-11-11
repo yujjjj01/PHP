@@ -32,29 +32,65 @@
                      <th>操作</th>
                  </tr>
              </thead>
+
              <tbody>
                  @foreach($list as $data)
                  <tr data-row data-tag_type="milestone">
-                     <td class="num text-muted">1</td>
-                     <td data-mark>{{$data->year}} / {{$data->months}}</td>
-                     <td data-mark>{{$data->title}}</td>
-                     <td><span class="badge badge-{{$data->type->label}}" data-mark>{{$data->types->title}}</span>
+
+                     <!-- 編號 -->
+                     <td class="num text-muted">
+                         {{ $loop->iteration }}
                      </td>
-                     <td data-mark>{{$data->type->title}}</td>
+
+                     <!-- 年月 -->
+                     <td data-mark>
+                         {{ $data->years }} / {{ $data->months }}
+                     </td>
+
+                     <!-- 標題 -->
+                     <td data-mark>
+                         {{ $data->title }}
+                     </td>
+
+                     <!-- 分類標籤 -->
+                     <td>
+                         <span class="badge badge-{{ $data->types?->label ?? 'secondary' }}" data-mark>
+                             {{ $data->types?->title ?? '未分類' }}
+                         </span>
+                     </td>
+
+                     <!-- 分類名稱 -->
+                     <td data-mark>
+                         {{ $data->types?->title ?? '未分類' }}
+                     </td>
+
+                     <!-- 操作按鈕 -->
                      <td>
                          <div class="actions">
-                             <a href="edit/{{$data->id}}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
-                             <button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{$data->id}}')"><i class="fa fa-trash"></i> 刪除</button>
+
+                             <a href="edit/{{ $data->id }}"
+                                 class="btn btn-outline btn-xs">
+                                 <i class="fa fa-edit"></i> 修改
+                             </a>
+
+                             <button type="button"
+                                 class="btn btn-danger-outline btn-xs"
+                                 onclick="doDelete('{{ $data->id }}')">
+                                 <i class="fa fa-trash"></i> 刪除
+                             </button>
+
                          </div>
                      </td>
+
                  </tr>
                  @endforeach
              </tbody>
+
          </table>
      </div>
 
      <div class="admin-table-info">
-        {{ $list->links() }}
+         {{ $list->links() }}
      </div>
  </div>
  @endsection

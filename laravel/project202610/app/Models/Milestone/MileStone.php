@@ -11,7 +11,7 @@ class MileStone extends Model
     public $timestamps = false;
     protected $table = "milestone";
     protected $primaryKey = 'id';
-    protected $fillable = ["id","typeId","years","months","title","content","createTime"];
+    protected $fillable = ["id","typeId","years","months","title","content","point","createTime"];
 
     public function types():BelongsTo
     {
