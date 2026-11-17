@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MileStoneController;
 use App\Http\Controllers\Admin\MileStoneTypeController;
+use App\Http\Controllers\Front\AIMileStoneController;
 use App\Http\Controllers\Front\FrontMileStoneController as MileStone;
 use Illuminate\Support\Facades\Route;
 
@@ -85,3 +86,4 @@ Route::group(["middleware" => "manager", "prefix" => "admin/milestone"], functio
 
 //前台
 Route::get("milestone",[MileStone::class,"list"]);
+Route::get("ai",[AIMileStoneController::class,"index"]);
