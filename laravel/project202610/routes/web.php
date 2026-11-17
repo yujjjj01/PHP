@@ -87,3 +87,4 @@ Route::group(["middleware" => "manager", "prefix" => "admin/milestone"], functio
 //前台
 Route::get("milestone",[MileStone::class,"list"]);
 Route::get("ai",[AIMileStoneController::class,"index"]);
+Route::get("ai/word",[AIMileStoneController::class,"word"]);
