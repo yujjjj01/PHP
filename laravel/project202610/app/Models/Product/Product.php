@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -19,5 +20,15 @@ class Product extends Model
     public function labels():BelongsTo
     {
         return $this->belongsTo(ProductType::class,"label_id","id");
+    }
+    //商品圖
+    public function photos():HasMany
+    {
+        return $this->hasMany(ProductPhoto::class,"productId","id");
+    }
+    //商品規格
+    public function specs():HasMany
+    {
+        return $this->hasMany(ProductSpec::class,"productId","id");
     }
 }
