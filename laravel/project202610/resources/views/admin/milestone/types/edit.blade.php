@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 2026.11.04 08:47修改-->
     <title>修改大事記類別</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,7 +12,7 @@
     <!-- 前台與後台共用同一份 CSS -->
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-
+    <!--這裡的javascript刪除-->
 </head>
 
 <body class="admin-body">
@@ -23,7 +24,7 @@
         </a>
         <nav class="admin-nav">
             <div class="nav-group">總覽</div>
-            <a href="index.html"><i class="fa fa-tachometer-alt"></i> 儀表板</a>
+            <a href="/"><i class="fa fa-tachometer-alt"></i> 儀表板</a>
             <div class="nav-group">網站內容</div>
             <a href="banners.html"><i class="fa fa-images"></i> 首頁輪播</a>
             <a href="features.html"><i class="fa fa-medal"></i> 特色 / 核心價值</a>
@@ -51,7 +52,7 @@
             <button class="admin-menu-toggle" aria-label="選單"><i class="fa fa-bars"></i></button>
             <div class="page-name">管理員管理</div>
             <div class="admin-user">
-                <a href="/index.html" target="_blank"><i class="fa fa-external-link-alt"></i> 前台</a>
+                <a href="../index.html" target="_blank"><i class="fa fa-external-link-alt"></i> 前台</a>
                 <span><i class="fa fa-user-circle"></i> 系統管理員</span>
                 <a href="login.html" data-logout><i class="fa fa-sign-out-alt"></i> 登出</a>
             </div>
@@ -60,33 +61,44 @@
         <main class="admin-content">
             <div class="admin-card">
                 <div class="admin-card-header">
-
-                    <h2>
-                        <i class="fa fa-user-shield"></i> <span data-mode-text>修改大事記類別</span>
+                    <!-- 2026.11.04 08:48修改-->
+                    <h2><i class="fa fa-user-shield"></i>
+                        <span data-mode-text>修改大事記類別</span>
                     </h2>
                     <a href="/admin/milestone/types/list" class="btn btn-light btn-sm"><i class="fa fa-arrow-left"></i> 返回列表</a>
                 </div>
                 <div class="admin-card-body">
-
+                    <!-- 2026.11.04 08:49修改
+                        接下來
+                        1.表單(form)的action改為"/admin/milestone/types/update" 
+                        2.加上<input type="hidden" name="id" value="{{ $types->id }}">
+                        (要修改哪一筆資料,將name=id送到後端)
+                        3.在MileStoneTypeController中新增update function
+                        4.在路由中新增Route::post("/admin/milestone/types/update", [MileStoneTypeController::class, "update"]) 
+                        5.修改完成後要告知使用者已經修改完成
+                    -->
                     <form class="admin-form" action="/admin/milestone/types/update" method="post">
-                        <input type="hidden" name="id" value="{{$types->id}}">
+                        <input type="hidden" name="id" value="{{ $types->id }}">
                         @csrf
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label" for="label">標籤 <span class="req">*</span></label>
-                                <input type="text" id="label" name="label" value="{{$types->label}}" class="form-control" required>
+                                <!-- 2026.11.04 09:02 加上value -->
+                                <input type="text" id="label" name="label" class="form-control" required value="{{ $types->label }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="title">標題<span class="req">*</span></label>
+                            <label class="form-label" for="title">標題 <span class="req">*</span></label>
                             <div class="input-icon-wrap">
-                                <input type="text" id="title" name="title" class="form-control" required>
+                                <!-- 2026.11.04 09:02 加上value -->
+                                <input type="text" id="title" name="title" class="form-control" required value="{{ $types->title }}">
                             </div>
                         </div>
-
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 儲存</button>
-                            <a href="/admin/milestone/types/list" class="btn btn-outline"><i class="fa fa-times"></i> 取消</a>
+                            <a href="/admin/milestone/types/list" class="btn btn-outline">
+                                <i class="fa fa-times"></i> 取消
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -94,7 +106,6 @@
         </main>
         <footer class="admin-footer">&copy; 2026 品牌名稱 管理系統</footer>
     </div>
-
 </body>
 
 </html>

@@ -9,5 +9,5 @@ class ProductSpec extends Model
     public $timestamps = false;
     protected $table = "product_spec";
     protected $primaryKey = 'id';
-    protected $fillable = ["id","productId","title","content","createTime"];
+    protected $fillable = ["id", "productId", "title", "content", "createTime"];
 }

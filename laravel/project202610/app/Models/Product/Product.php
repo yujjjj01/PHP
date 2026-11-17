@@ -11,24 +11,30 @@ class Product extends Model
     public $timestamps = false;
     protected $table = "product";
     protected $primaryKey = 'id';
-    protected $fillable = ["id","product_name","title","product_no","price","sale_price","qty","content","create_time","type_id","label_id"];
+    protected $fillable = [
+        "id", "label_id", "type_id", "product_name", "title", "product_no",
+        "price", "sale_price", "qty", "content", "create_time"
+    ];
 
-    public function types():BelongsTo
+    public function types(): BelongsTo
     {
-        return $this->belongsTo(ProductType::class,"type_id","id");
+        return $this->belongsTo(ProductType::class, "type_d", "id");
     }
-    public function labels():BelongsTo
+
+    public function labels(): BelongsTo
     {
-        return $this->belongsTo(ProductType::class,"label_id","id");
+        return $this->belongsTo(ProductLabel::class, "label_id", "id");
     }
-    //商品圖
-    public function photos():HasMany
+
+    // 商品圖
+    public function photos(): HasMany
     {
-        return $this->hasMany(ProductPhoto::class,"productId","id");
+        return $this->hasMany(ProductPhoto::class, "productId", "id");
     }
-    //商品規格
-    public function specs():HasMany
+
+    // 商品規格
+    public function specs(): HasMany
     {
-        return $this->hasMany(ProductSpec::class,"productId","id");
+        return $this->hasMany(ProductSpec::class, "productId", "id");
     }
 }

@@ -8,14 +8,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckManager
 {
-
     public function handle(Request $request, Closure $next): Response
     {
-        if (empty(session()->get('userId'))) 
+        // 如果取不到登時後台時,暫存的帳號, 表示沒登入過,或暫存的時間已過期
+        // empty:空的  也可以用is_null
+        if (empty(session()->get("userId")))
         {
-            return redirect('/admin');
+            // 轉址到後台登入頁
+            return redirect("/admin");
         }
-
         return $next($request);
     }
 }

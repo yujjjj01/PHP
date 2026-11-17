@@ -19,6 +19,12 @@
             <div class="logo-box">B</div>
             <div><span>品牌名稱</span><small>ADMIN</small></div>
         </a>
+        <!--
+        1.修改儀表板的超連結, 將href="index.html", 改為href="/"
+        2.修改管理員的超連結, 將href="admins.html", 改為href="/manager/list"
+        3.修改[新增管理員]的超連結, 將href="admins-form.html" 改為href="/manager/create"
+        4.修改<table>中的內容</table>, 改為foreach, 大約第70幾行, html格式化後約80行左右
+    -->
         <nav class="admin-nav">
             <div class="nav-group">總覽</div>
             <a href="/"><i class="fa fa-tachometer-alt"></i> 儀表板</a>
@@ -49,7 +55,7 @@
             <button class="admin-menu-toggle" aria-label="選單"><i class="fa fa-bars"></i></button>
             <div class="page-name">管理員管理</div>
             <div class="admin-user">
-                <a href="/index.html" target="_blank"><i class="fa fa-external-link-alt"></i> 前台</a>
+                <a href="../index.html" target="_blank"><i class="fa fa-external-link-alt"></i> 前台</a>
                 <span><i class="fa fa-user-circle"></i> 系統管理員</span>
                 <a href="login.html" data-logout><i class="fa fa-sign-out-alt"></i> 登出</a>
             </div>
@@ -86,7 +92,8 @@
                                 <td data-mark>{{ $data->pwd }}</td>
                                 <td>
                                     <div class="actions">
-                                        <a href="/manager/edit/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改
+                                        <a href="/manager/edit/{{ $data->id }}" class="btn btn-outline btn-xs">
+                                            <i class="fa fa-edit"></i> 修改
                                         </a>
                                         <button type="button" class="btn btn-danger-outline btn-xs"
                                             onclick="doDelete('{{ $data->id }}')">

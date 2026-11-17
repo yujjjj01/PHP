@@ -1,5 +1,5 @@
 @extends("front.layout")
-@section("title","大事記")
+@section("title", "大事記")
 @section("content")
 <div class="page-hero">
     <div class="container container-narrow">
@@ -11,31 +11,33 @@
 <div class="section-lg">
     <div class="container container-narrow">
         <div class="timeline">
+            {{-- 傳統php: <?php $cnt = 0; ?> --}}
             @php
-            $cnt = 0;
+                $cnt =  0; // 計數器初始值為0
             @endphp
-            @foreach($years as $yy)
+            {{-- 第一個廻圈為年份--}}
+            @foreach($years as $yy) 
             <div class="year-marker">
                 <div class="year-pill">{{ $yy }}</div>
             </div>
-
-            @foreach($list as $data)
-            @continue($data->years != $yy)
-            @php
-            $cnt++;
-            @endphp
-            <div class="event {{ $cnt % 2 == 1 ? 'right':'left'}}">
-                <div class="event-dot{{$data->point == 'Y' ? 'highlight':''}}"></div>
+                @foreach($list as $data) {{-- 第二個廻圈為所有大事記 --}}
+                    @continue($data->years != $yy) {{-- 當大事記的years不等於外圈的years時,則跳過(繼續下一筆) --}}
+                    @php
+                        $cnt++; // ++:每次加一
+                    @endphp
+                    {{-- %: 取餘數 --}}
+            <div class="event {{ $cnt % 2 == 1 ? 'right' : 'left' }}">
+                <div class="event-dot {{ $data->point == 'Y' ? 'highlight' : '' }}"></div>
                 <div class="event-content">
-                    <div class="event-month">{{$data->months }} 月</div>
+                    <div class="event-month">{{ $data->months }} 月</div>
                     <div class="event-title">{{ $data->title }}</div>
                     <div class="event-desc">{!! $data->content !!}</div>
-                    <span class="event-tag tag-{{ $data->types->label}}"><i class="fa fa-star"></i> {{$data->types->title}}</span>
+                    <span class="event-tag tag-{{ $data->types->label }}"><i class="fa fa-star"></i> 
+                    {{ $data->types->title }}</span>
                 </div>
             </div>
+                @endforeach
             @endforeach
-            @endforeach
-
         </div>
     </div>
 </div>

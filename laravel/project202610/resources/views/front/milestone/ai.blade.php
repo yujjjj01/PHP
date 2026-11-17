@@ -1,34 +1,43 @@
 @extends("front.layout")
-@section("title","AI大事記")
+@section("title", "AI大事記")
 @section("content")
 <div class="section-lg">
-    <div class="container container-narrow">
-        <h2><i class="fa fa-robot"></i>AI 大事記</h2>
-        <form method="get" action="/ai" style="margin: 20px 0;display:flex">
+    <div class="container">
+        <h2><i class="fa fa-robot"></i> AI 大事記</h2>
+        <!-- 
+            margin:20px 0 表單上方及下方間距為20px, 左右間距為0
+            display: flex 表單內的元素由左至右排列
+            display: 顯示
+            flex: 彈性排版模式
+            gap: 表單各元素之間的間距
+            autofocus:游標自動停佇
+        -->
+        <form method="get" action="/ai" style="margin: 20px 0; display:flex; gap:10px">
             @csrf
-            <input type="text" name="keyword" class="form-control" value="{{$keyword}}" required>
+            <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" required autofocus>
             <button type="submit" class="btn btn-primary">查詢</button>
         </form>
-        @if (!empty($keyword) && count($list)==0)
-            <div class="alert alert-danger">查無資料，或AI呼叫失敗</div>
+        {{-- count:計算陣列大小 count($list)也可用empty($list)或is_null($list) --}}
+        @if (!empty($keyword) && count($list) == 0)
+            <div class="alert alert-danger">查無資料, 或AI呼叫失敗</div>
         @endif
 
         @if (count($list)>0)
-        <h3>{{$keyword}}的大事記</h3>
-        <table style="width: 100%; border-collapse:collapse">
-            <tr style="background: #dddddd;">
-                <th style="width: 10%;">年份</th>
-                <th style="width: 60%;">標題</th>
-                <th style="width: 30%;">內容</th>
-            </tr>
-            @foreach($list as $data)
-                <tr>
-                    <td class="text-center">{{ $data["year"] ?? "" }}</td>
-                    <td class="text-center">{{ $data["title"] ?? "" }}</td>
-                    <td class="text-center">{{ $data["content"] ?? "" }}</td>
+            <h3>{{ $keyword }} 的大事記</h3>
+            <table style="width: 100%; border-collapse:collapse">
+                <tr style="background: #dddddd;">
+                    <th style="width: 10%;">年份</th>
+                    <th style="width: 40%;">標題</th>
+                    <th style="width: 50%;">內容</th>
                 </tr>
-            @endforeach
-        </table>
+                @foreach($list as $data)
+                    <tr>
+                        <td class="text-center">{{ $data["year"] ?? ""}}</td>
+                        <td class="text-center">{{ $data["title"] ?? ""}}</td>
+                        <td class="text-center">{{ $data["content"] ?? ""}}</td>
+                    </tr>
+                @endforeach
+            </table>
         @endif
     </div>
 </div>

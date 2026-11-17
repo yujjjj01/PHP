@@ -1,0 +1,96 @@
+
+帳號管理
+1.新增ManagerController： php artisan make:controller Admin/ManagerController
+2.在ManagerController中新增public function list():帳號列表
+3.在路由routes/web.php中新增/manager/list
+4.在resources/views/admin新增manager資料夾
+5.在resources/views/admin/manager新增list.blade.php
+
+大事記管理
+1.新增Admin/MileStoneController: php artisan make:controller Admin/MileStoneController
+2.在Admin/MileStoneControler中新增public function list()
+3.在路由routes/web.php中新增/admin/milestone/list
+4.在resources/views/admin中新增milestone資料夾
+5.在resources/views/admin/milestone中新增list.blade.php
+6.用visual studio code(或記事本等文書編輯器)開啟原始網頁html/admin/milestones.html
+7.將原始網頁html/admin/milestones.html全選後複製到resources/views/admin/milestone/list.blade.php
+8.新增大事記類別管理控制器
+Admin/MileStoneTypeController: php artisan make:controller Admin/MileStoneTypeController
+9.在大事記類別管理控制器(Admin/MileStoneTypeController)中新增public function list()(列表)
+10.在路由中新增/admin/milestone/types/list
+11.在resources/views/admin/milestone中新增types資料夾(大事記類別)
+12.在resources/views/admin/milestone/types中新增list.blade.php(大事記類別列表)
+13.在大事記類別管理控制器(Admin/MileStoneTypeController)中新增public function create()(新增大事記類別)
+14.在路由中新增/admin/milestone/types/create(新增大事記類別)
+15.在resources/views/admin/milestone/types中新增create.blade.php(新增大事記類別)
+16.新增Milestone類別的Model : php artisan make:model Milestone/MileStoneType
+17.新增Milestone的Model : php artisan make:model Milestone/MileStone
+18.新增大事記類別資料表(milestone_type), 欄位(id A_I, label varchar(10), tilte varchar(10))
+19.新增大事記資料表(milestone), 欄位(id A_I, years char(4), months char(2), title varchar(200), content varchar(500),typeId int, createTime timestamp default:CURRENT_TIMESTAMP)
+如何知道要建哪些欄位?查看前台,後台網頁及html,有哪些資料要入資料表
+20.完成MileStoneType及MileStone二個model內容
+21.在MileStoreTypeController的list function 中取出MileStoneType model資料
+22.將MileStoreTypeController的list function中的資料渲染到resources/views/admin/milestone/types/list.blade.php
+23.將原始網頁html/admin/milestones.html全選後複製到resources/views/admin/milestone/type/list.blade.php(借用這個網頁, 然後再修改欄位)
+24.在瀏覽器輸入http://127.0.0.1:8000/admin/milestone/types/list
+25.修改resources/views/admin/milestone/type/list.blade.php
+將<link rel="stylesheet" href="../css/style.css" /> ../ 回到上一層  ../../  回到上二層, 相對路徑
+改為<link rel="stylesheet" href="/css/style.css" /> / 從根目錄開始, 絶對路徑
+然後開始套程式
+
+
+後台樣板(2026.11.04)
+1.在resources/views/admin下新增layout.blade.php
+2.開啟admin/milestone/types/list.blade.php後全選,複製
+3.將複製後的內容貼到admin/layout.blade.php中
+4.為何要用admin/milestone/types/list.blade.php, 因為剛才有做新功能,可以重複使用
+5.修改layout.blade.php
+
+
+middleware(2026.11.04)
+1.修改config/session.php
+    將'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    改為 'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', true),
+2.建立middleware: php artisan make:middleware XXX
+    例如 php artisan make:middleware CheckManager
+    會在app/Http下新增一個Middleware資料夾,並在資料夾中生成CheckManager.php
+3.編輯CheckManager.php
+4.開啟app/bootstrap/app.php
+  ->withMiddleware(function (Middleware $middleware): void {
+        // 在這裡加上CheckManager, "manager":路由中會用到的名稱, 用manager代表CheckManager.php
+        $middleware->alias(["manager" => CheckManager::class]);
+    })
+5.開啟路由routes/web.php, 將後台的路由加上middleware("manager")
+
+----------------------------------------------
+大事記(2026.11.01)
+1.新增
+  (1)MileStoneController加上add function
+  (2)resources/views/admin/milestone新增add.blade.php
+  (3)開啟原始網頁admin/milestones-form.html
+  (4)選取<main></main>中的html, 複製, 貼到add.blade.php中
+  (5)大事記路由群組加上Route::get("add", [MileStoneController::class, "add"]);
+  (6)MileStoneController加上store function
+  (7)大事記路由群組加上Route::post("store", [MileStoneController::class, "store"]);
+2.修改
+  (1)MileStoneController加上edit function
+  (2)resources/views/admin/milestone新增edit.blade.php
+  (3)開啟add.blade.php, 全選, 複製到edit.blade.php
+  (4)修改edit.blade.php
+  (5)大事記路由群組加上Route::get("edit/{id}", [MileStoneController::class, "edit"]);
+  (6)MileStoneController加上update function
+  (7)大事記路由群組加上Route::post("update", [MileStoneController::class, "update"]);
+3.刪除
+  (1)修改樣板(admin/layout.blade.php)中javascript的doDelete function,讓所有後台共用同一個function
+  (2)MileStoneController加上delete function
+  (3)大事記路由群組加上Route::post("delete", [MileStoneController::class, "delete"]);
+4.前台
+  (1)resources/views下新增front資料夾,前台所有網頁都放在此資料夾下
+  (2)在front資料夾下新增milestone資料夾
+  (3)在front/milestone下新增list.blade.php
+  (4)新增前台大事記控制器 php artisan make:controller Front/FrontMileStoneController
+  (5)在FrontMileStoneController中加上list function
+  (6)新增前台大事記路由 Route::get("milestone", [FrontMileStoneController::class, "list"]);
+  (7)建立前台共用樣板, 在resources/views/front下新增layout.blade.php
+  (8)開啟原始網頁html/index.html, 全選,複製到resources/views/front/layout.blade.php
+  (9)開啟原始網頁html/milestones.html,選取<main></main>中的html, 複製, 貼到resources/views/front/milestone/list.blade.php中

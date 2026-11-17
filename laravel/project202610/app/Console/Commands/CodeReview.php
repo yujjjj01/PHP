@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class CodeReview extends Command
 {
     protected $signature = "code:review {path=app/Http/Controllers}";
-    protected $description = "用AI來檢查程式碼";
+    protected $description = "用 AI 來檢查程式碼";
 
     public function handle()
     {
@@ -18,34 +18,36 @@ class CodeReview extends Command
 
         foreach($files as $file)
         {
+            // getExtension:取得副檔名, 如果副檔名不是php則跳過不處理
             if ($file->getExtension() !== "php") continue;
-            $this->info("檢查中:" .$file->getRelativePathname());
+            // getRelativePathname:相對路徑, 例如Admin/AdminControler.php
+            $this->info("檢查中:" . $file->getRelativePathname());
+            // getRealPath:完整路徑, 例如D:\php\laravel\project11503-2\app\Http\Controllers\Admin\AdminController.php
             $code = File::get($file->getRealPath());
 
             $res = Http::withToken(config("services.groq.key"))
             ->timeout(120)
-            ->post("https://api.groq.com/openai/v1/chat/completions",[
-                "model" => env("GROQ_MODEL","openai/gpt-oss-120b"),
-                "messages"=>[
+            ->post("https://api.groq.com/openai/v1/chat/completions", [
+                "model" => env("GROQ_MODEL", "openai/gpt-oss-120b"),
+                "messages" => [
                     [
                         "role" => "system",
-                        "content" => "你是資深Laravel工程師，審查所有程式碼，用繁體中文列出:1.問題(含行號) 2.安全性風險" ."3.修改建議與範例程式碼。如果沒有問題也要回答沒有問題，請用台灣語言",
+                        "content" => "你是資深Laravel工程師,審查所有程式碼, 用正體中文列出:1.問題(含行號) 2.安全性風險"
+                            . " 3.修改建議與範例程式碼。如果沒有問題也要回答沒問題, 請用台灣用語", 
                     ],
                     [
-                        "role"=>"user",
-                        "content"=>"檔案:{$file->getRelativePathname()}\n\n{$code}",
-
+                        "role" => "user",
+                        "content" => "檔案:{$file->getRelativePathname()}\n\n{$code}",
                     ],
                 ],
-            
             ]);
 
-            $content = $res->json("choices.0.message.content")?? "AI沒回應";
+            $content = $res->json("choices.0.message.content") ?? "AI沒回應";
             $report .= "##{$file->getRelativePathname()}\n\n{$content}\n\n";
             sleep(2);
         }
 
-        File::put(storage_path("app/code_review.md"),$report);
+        File::put(storage_path("app/code_review.md"), $report);
         $this->info("檢查完成,檔案位置:storage/app/code_review.md");
     }
 }

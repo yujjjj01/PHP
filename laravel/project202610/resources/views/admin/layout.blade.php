@@ -22,7 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script>
-        function doDelete(id, btn,url) {
+        function doDelete(id, btn, url) {
             Swal.fire({
                 icon: "question",
                 title: "確定刪除?",
@@ -74,7 +74,7 @@
     <aside class="admin-sidebar">
         <a href="/admin/home" class="admin-brand">
             <div class="logo-box">B</div>
-            <div><span>xxxx後台管理</span><small>ADMIN</small></div>
+            <div><span>xxx後台管理系統</span><small>ADMIN</small></div>
         </a>
         <nav class="admin-nav">
             <div class="nav-group">總覽</div>
@@ -101,7 +101,7 @@
             <div class="nav-group">產品</div>
             <a href="/admin/product"{!! Request::is('admin/product/*') ? " class='active'" : "" !!}>
                 <i class="fa fa-box-open"></i> 產品管理</a>
-            <a href="/admin/product-categorie"{!! Request::is('admin/product-categorie/*') ? " class='active'" : "" !!}>
+            <a href="/admin/product/types/list"{!! Request::is('admin/product/types/*') ? " class='active'" : "" !!}>
                 <i class="fa fa-folder-open"></i> 產品分類</a>
             <div class="nav-group">會員與訂單</div>
             <a href="/admin/order"><i class="fa fa-receipt"></i> 訂單管理</a>
@@ -136,7 +136,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/main.js"></script>
-    <!-- <script src="/js/admin.js"></script> -->
+    <!--<script src="/js/admin.js"></script>-->
 </body>
 
 </html>

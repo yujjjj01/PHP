@@ -1,6 +1,7 @@
 @extends("admin.layout")
 @section("title", "後台首頁")
 @section("content")
+<!--開啟原始網頁admin/index.html 選取<main></main>之間的html, 複製後貼到此-->
 <div class="dash-grid">
     <a href="members.html" class="dash-card">
         <div class="dash-icon"><i class="fa fa-user-friends"></i></div>
@@ -110,5 +111,4 @@
         </table>
     </div>
 </div>
-
 @endsection

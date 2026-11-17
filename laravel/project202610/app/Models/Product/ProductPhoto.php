@@ -9,5 +9,5 @@ class ProductPhoto extends Model
     public $timestamps = false;
     protected $table = "product_photo";
     protected $primaryKey = 'id';
-    protected $fillable = ["id","productId","photo","createTime"];
+    protected $fillable = ["id", "productId", "photo", "createTime"];
 }

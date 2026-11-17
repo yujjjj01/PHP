@@ -1,0 +1,8 @@
+php artisan serve: 伺服器啟動
+在http://127.0.0.1:8000 按Ctrl鍵+滑鼠左鍵, 若直接在瀏覽器上輸入http://127.0.0.1:800
+如果有看到頁面,表示啟動成功
+
+建立控制器
+php artisan make:controller Admin/AdminController
+Admin:資料夾
+AdminController:控制器名稱
