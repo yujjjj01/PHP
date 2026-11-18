@@ -11,7 +11,7 @@
                 <input type="search" name="keyword" class="form-control" placeholder="搜尋分類名稱" autocomplete="off" />
             </form>
             <button type="button" class="btn btn-light btn-sm" data-clear><i class="fa fa-times"></i> 清除</button>
-            <a href="product-categories-form.html" class="btn btn-gold btn-sm"><i class="fa fa-plus"></i> 新增產品分類</a>
+            <a href="create" class="btn btn-gold btn-sm"><i class="fa fa-plus"></i> 新增產品分類</a>
         </div>
     </div>
 
