@@ -28,6 +28,7 @@ Route::group(["middleware" => "manager", "prefix" => "admin/product"], function 
 
     // 產品
 
+    Route::redirect("product/list", "/admin/product/list");
     Route::get("list", [AdminProductController::class, "list"]);
     Route::get("create", [AdminProductController::class, "create"]);
     Route::post("store", [AdminProductController::class, "store"]);

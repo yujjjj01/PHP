@@ -9,7 +9,7 @@
     <div class="admin-card-body">
         <form class="admin-form" action="store" method="post">
             @csrf
-            @include("admin.product.form")
+            @include("admin.product.product.form")
         </form>
     </div>
 

@@ -13,7 +13,7 @@ class AdminProductController extends Controller
     public function list()
     {
         $types = ProductType::get();
-        $list = Product::with(["types","labels","photos"])->orderByDesc("id")->pagination(10);
+        $list = Product::with(["types","labels","photos"])->orderByDesc("id")->paginate(10);
         return view("admin.product.product.list",compact("types","list"));
     }
 
