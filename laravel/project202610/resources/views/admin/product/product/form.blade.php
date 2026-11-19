@@ -87,7 +87,7 @@
         const btn = $("#aibtn");
         btn.prop("disable",true).html("<i class='fa fa-spinner fa-spin'></i> AI思考中..");
         $.ajax({
-            url:"/admin/product/doAI",
+            url:"/admin/product/product/doAI",
             type:"post",
             data:{
                 product_name:$("#product_name").val(),

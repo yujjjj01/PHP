@@ -10,7 +10,7 @@
             <div class="dash-label">會員數</div>
         </div>
     </a>
-    <a href="/admin/product/list" class="dash-card">
+    <a href="/admin/product/product/list" class="dash-card">
         <div class="dash-icon gold"><i class="fa fa-box-open"></i></div>
         <div>
             <div class="dash-num">9</div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Product\AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Product\ProductLabelController;
+use App\Http\Controllers\Admin\Product\ProductPhotoController;
 use App\Http\Controllers\Admin\Product\ProductTypeController;
 // 後台產品
 Route::group(["middleware" => "manager", "prefix" => "admin/product"], function () {
@@ -27,13 +28,26 @@ Route::group(["middleware" => "manager", "prefix" => "admin/product"], function 
     });
 
     // 產品
+    Route::redirect("list", "/admin/product/product/list");
+    Route::group(["prefix" => "product"], function () {
+        Route::get("list", [AdminProductController::class, "list"]);
+        Route::get("create", [AdminProductController::class, "create"]);
+        Route::post("store", [AdminProductController::class, "store"]);
+        Route::get("edit/{id}", [AdminProductController::class, "edit"]);
+        Route::post("update", [AdminProductController::class, "update"]);
+        Route::post("delete", [AdminProductController::class, "delete"]);
+        Route::post("doAI", [AdminProductController::class, "doAI"]);
+    });
 
-    Route::redirect("product/list", "/admin/product/list");
-    Route::get("list", [AdminProductController::class, "list"]);
-    Route::get("create", [AdminProductController::class, "create"]);
-    Route::post("store", [AdminProductController::class, "store"]);
-    Route::get("edit/{id}", [AdminProductController::class, "edit"]);
-    Route::post("update", [AdminProductController::class, "update"]);
-    Route::post("delete", [AdminProductController::class, "delete"]);
-    Route::post("doAI", [AdminProductController::class, "doAI"]);
+    // 產品圖
+    Route::group(["prefix" => "photo"], function () {
+        Route::get("list/{productId?}", [ProductPhotoController::class, "list"]);
+        Route::get("create", [ProductPhotoController::class, "create"]);
+        Route::post("store", [ProductPhotoController::class, "store"]);
+        Route::get("edit/{id}", [ProductPhotoController::class, "edit"]);
+        Route::post("update", [ProductPhotoController::class, "update"]);
+        Route::post("delete", [ProductPhotoController::class, "delete"]);
+        Route::post("doAI", [ProductPhotoController::class, "doAI"]);
+    });
+
 });
