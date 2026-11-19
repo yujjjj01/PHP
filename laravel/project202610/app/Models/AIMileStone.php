@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class AiMileStone extends Model
 {
-    public static function serach($keyword)
+    public static function serach(string $keyword)
     {
         /*
             openai: https://api.openai.com/v1/chat/completions

@@ -35,4 +35,5 @@ Route::group(["middleware" => "manager", "prefix" => "admin/product"], function 
     Route::get("edit/{id}", [AdminProductController::class, "edit"]);
     Route::post("update", [AdminProductController::class, "update"]);
     Route::post("delete", [AdminProductController::class, "delete"]);
+    Route::post("doAI", [AdminProductController::class, "doAI"]);
 });
